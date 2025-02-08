@@ -1,6 +1,6 @@
 import scrapy
 
-class TaskSpider(scrapy.Spider):
+class AcademySpider(scrapy.Spider):
     name = 'academy'
     start_urls = ['https://www.academy.com/p/nike-womens-court-legacy-next-nature-shoes']
 
@@ -14,9 +14,9 @@ class TaskSpider(scrapy.Spider):
         reviews_score_str = response.css('span.ratingAvg.textCaption::text').get()
 
         # Handle potential None values
-        name = name.strip() if name else "Unknown"
+        name = name.rstrip() if name else "Unknown"
         price = float(price_str.replace('$', '')) if price_str else 0.0
-        color = color.strip() if color else "Unknown"
+        color = color if color else "Unknown"
 
         reviews_count = int(reviews_count_str.replace('(', '').replace(')', '')) if reviews_count_str else 0
         reviews_score = float(reviews_score_str) if reviews_score_str else 0.0
