@@ -14,9 +14,8 @@ class AcademySpider(scrapy.Spider):
         reviews_score_str = response.css('span.ratingAvg.textCaption::text').get()
 
         # Handle potential None values
-        name = name.rstrip() if name else "Unknown"
-        price = float(price_str.replace('$', '')) if price_str else 0.0
-        color = color if color else "Unknown"
+        name = name.rstrip()
+        price = float(price_str.replace('$', ''))
 
         reviews_count = int(reviews_count_str.replace('(', '').replace(')', '')) if reviews_count_str else 0
         reviews_score = float(reviews_score_str) if reviews_score_str else 0.0
